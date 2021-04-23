@@ -22,4 +22,8 @@ public class TutorialService {
   public Optional<Tutorial> findById(Long id) {
     return tutorialRepo.findById(id);
   }
+
+  public Tutorial createTutorial(Tutorial tutorial) {
+    return tutorialRepo.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+  }
 }
