@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,10 +56,26 @@ public class TutorialController {
   @PostMapping("/tutorial")
   public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
     try {
-      Tutorial tutorialAdd = tutorialService.createTutorial(tutorial);
-      return new ResponseEntity<>(tutorialAdd, HttpStatus.CREATED);
+      Tutorial tutorialAdded = tutorialService.save(tutorial);
+      return new ResponseEntity<>(tutorialAdded, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @PutMapping("/tutorial/{id}")
+  public ResponseEntity<Tutorial> updateTutorial(
+      @PathVariable("id") Long id, @RequestBody Tutorial tutorial) {
+    Optional<Tutorial> tutorialUpdate = tutorialService.findById(id);
+    if (tutorialUpdate.isPresent()) {
+      Tutorial tutorialUpdated = tutorialUpdate.get();
+      tutorialUpdated.setTitle(tutorial.getTitle());
+      tutorialUpdated.setDescription(tutorial.getDescription());
+      tutorialUpdated.setPublished(tutorial.isPublished());
+
+      return new ResponseEntity<>(tutorialService.save(tutorialUpdated), HttpStatus.OK);
+    } else {
+      return ResponseEntity.notFound().build();
     }
   }
 }

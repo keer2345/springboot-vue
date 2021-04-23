@@ -23,7 +23,8 @@ public class TutorialService {
     return tutorialRepo.findById(id);
   }
 
-  public Tutorial createTutorial(Tutorial tutorial) {
-    return tutorialRepo.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+  public Tutorial save(Tutorial tutorial) {
+//    return tutorialRepo.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+    return tutorialRepo.save(tutorial);
   }
 }
