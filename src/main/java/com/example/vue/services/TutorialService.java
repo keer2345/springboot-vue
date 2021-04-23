@@ -24,7 +24,12 @@ public class TutorialService {
   }
 
   public Tutorial save(Tutorial tutorial) {
-//    return tutorialRepo.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+    //    return tutorialRepo.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(),
+    // false));
     return tutorialRepo.save(tutorial);
+  }
+
+  public void deleteById(Long id) {
+    tutorialRepo.deleteById(id);
   }
 }
