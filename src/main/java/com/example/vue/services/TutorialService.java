@@ -34,4 +34,8 @@ public class TutorialService {
   public void deleteAll() {
     tutorialRepo.deleteAll();
   }
+
+  public List<Tutorial> findByPublished(boolean b) {
+    return tutorialRepo.findByPublished(true);
+  }
 }
