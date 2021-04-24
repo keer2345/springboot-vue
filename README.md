@@ -57,3 +57,8 @@ vue create frontend
 cd frontend
 yarn serve
 ``` 
+**Add modules:**
+``` sh
+yarn add vue-router
+yarn add axios
+```
